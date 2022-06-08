@@ -1,13 +1,12 @@
 import { access, constants, writeFile } from 'fs';
+import { resolve } from 'path';
 
-const fileName = 'fresh.txt';
-const pathName = `./files/${fileName}`;
+const pathName = resolve('src/fs/files', 'fresh.txt');
 
 export const create = async () => {
   access(pathName, constants.F_OK, (err) => {
-      console.log(err);
     if (err) {
-      writeFile('./src/fs/files/fresh.txt', 'I am fresh and young', (err) => {
+      writeFile(pathName, 'I am fresh and young', (err) => {
         if (err) {
           throw new Error(err.message);
         }
